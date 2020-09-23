@@ -1,0 +1,208 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/Scenes/LoginScene.gd" type="Script" id=1]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RegisterPanel" type="Panel" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 128.0
+margin_top = -164.0
+margin_right = 456.0
+margin_bottom = 124.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="RegisterPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 12
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="RegisterPanel/VBox"]
+margin_top = 67.0
+margin_right = 328.0
+margin_bottom = 81.0
+text = "Register"
+align = 1
+valign = 1
+
+[node name="Username" type="HBoxContainer" parent="RegisterPanel/VBox"]
+margin_top = 93.0
+margin_right = 328.0
+margin_bottom = 117.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="RegisterPanel/VBox/Username"]
+margin_left = 25.0
+margin_top = 5.0
+margin_right = 99.0
+margin_bottom = 19.0
+text = "Username: "
+
+[node name="Input" type="LineEdit" parent="RegisterPanel/VBox/Username"]
+margin_left = 103.0
+margin_right = 303.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 200, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Email" type="HBoxContainer" parent="RegisterPanel/VBox"]
+margin_top = 129.0
+margin_right = 328.0
+margin_bottom = 153.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="RegisterPanel/VBox/Email"]
+margin_left = 24.0
+margin_top = 5.0
+margin_right = 99.0
+margin_bottom = 19.0
+text = "Email:         "
+
+[node name="Input" type="LineEdit" parent="RegisterPanel/VBox/Email"]
+margin_left = 103.0
+margin_right = 303.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 200, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Password" type="HBoxContainer" parent="RegisterPanel/VBox"]
+margin_top = 165.0
+margin_right = 328.0
+margin_bottom = 189.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="RegisterPanel/VBox/Password"]
+margin_left = 24.0
+margin_top = 5.0
+margin_right = 100.0
+margin_bottom = 19.0
+text = "Password:   "
+
+[node name="Input" type="LineEdit" parent="RegisterPanel/VBox/Password"]
+margin_left = 104.0
+margin_right = 304.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 200, 0 )
+secret = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RegisterConfirm" type="Button" parent="RegisterPanel/VBox"]
+margin_top = 201.0
+margin_right = 328.0
+margin_bottom = 221.0
+text = "Register"
+
+[node name="LoginPanel" type="Panel" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 608.0
+margin_top = -164.0
+margin_right = 936.0
+margin_bottom = 124.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="LoginPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 12
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="LoginPanel/VBox"]
+margin_top = 85.0
+margin_right = 328.0
+margin_bottom = 99.0
+text = "Login"
+align = 1
+valign = 1
+
+[node name="Username" type="HBoxContainer" parent="LoginPanel/VBox"]
+margin_top = 111.0
+margin_right = 328.0
+margin_bottom = 135.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="LoginPanel/VBox/Username"]
+margin_left = 25.0
+margin_top = 5.0
+margin_right = 99.0
+margin_bottom = 19.0
+text = "Username: "
+
+[node name="Input" type="LineEdit" parent="LoginPanel/VBox/Username"]
+margin_left = 103.0
+margin_right = 303.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 200, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Password" type="HBoxContainer" parent="LoginPanel/VBox"]
+margin_top = 147.0
+margin_right = 328.0
+margin_bottom = 171.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="LoginPanel/VBox/Password"]
+margin_left = 24.0
+margin_top = 5.0
+margin_right = 100.0
+margin_bottom = 19.0
+text = "Password:   "
+
+[node name="Input" type="LineEdit" parent="LoginPanel/VBox/Password"]
+margin_left = 104.0
+margin_right = 304.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 200, 0 )
+secret = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LoginConfirm" type="Button" parent="LoginPanel/VBox"]
+margin_top = 183.0
+margin_right = 328.0
+margin_bottom = 203.0
+text = "Login"
+[connection signal="pressed" from="RegisterPanel/VBox/RegisterConfirm" to="." method="_on_RegisterConfirm_pressed"]
+[connection signal="pressed" from="LoginPanel/VBox/LoginConfirm" to="." method="_on_LoginConfirm_pressed"]
