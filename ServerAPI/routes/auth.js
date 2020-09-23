@@ -10,20 +10,6 @@ router.post("/register", async (req, res) => {
 
         console.log(req.body);
 
-        /*
-        // Check if user already exists
-        const emailExist = await User.findOne({email: req.body.email});
-        if (emailExist) {
-            return res.status(400).send("Mail already existing.");
-        }
-
-        // Check if user already exists
-        const usernameExist = await User.findOne({username: req.body.username});
-        if (usernameExist) {
-            return res.status(400).send("Username already existing.");
-        }
-        */
-
         // Create a new user
         const newUser = User.create({
             Username: req.body.username,
@@ -52,32 +38,28 @@ router.post("/login", async (req, res) => {
     try {
         
         // Check if user already exists
-    const user = await User.findOne({
+    User.findOne({
         where: {
             Username: req.body.username
         }
+    }).then((user) => {
+        // Password is correct
+        if (!user.validPassword(req.body.password)) {
+            return res.status(400).send("Invalid password");
+        }
+        // Create and assign a jwt token
+        const token = jwt.sign({_id: user.IdUser}, process.env.JWT_SECRET);
+        res.header("res-category", "login");
+        res.header("auth-token", token).send(token);
+    }).catch((err) => {
+        console.log(err);
+        res.status(404).send("Username doesn't exist.");
     });
-    if (!user) {
-        return res.status(404).send("Username doesn't exist.");
-    }
-
-    // Password is correct
-    const validPassword = await User.validPassword(req.body.password);
-    if(!validPassword) {
-        return res.status(400).send("Invalid password");
-    }
-
-    // Create and assign a jwt token
-    const token = jwt.sign({_id: user.IdUser}, process.env.JWT_SECRET);
-    res.header("res-category", "login");
-    res.header("auth-token", token).send(token);
-
 
     } catch (err) {
         console.log(err);
         res.status(400).send(err);
     }
-    
     
 });
 

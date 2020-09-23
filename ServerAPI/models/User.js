@@ -37,13 +37,12 @@ const User = db.define('User', {
     },
     {
         timestamps: false,
-        freezeTableName: true,
-        instanceMethods: {
-            validPassword(password) {
-                return bcrypt.compare(password, this.password);
-            }
-        }
+        freezeTableName: true
     }
 )
+
+User.prototype.validPassword = (password) => {
+    return bcrypt.compare(password, this.Password);
+}
 
 module.exports = User;

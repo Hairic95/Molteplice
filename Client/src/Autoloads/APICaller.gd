@@ -69,7 +69,7 @@ func login_user(username : String, password : String):
 		"password": password
 	}
 	
-	register_request.request(api_url + "login/", headers, false, HTTPClient.METHOD_POST, JSON.print(messageBody))
+	login_request.request(api_url + "login/", headers, false, HTTPClient.METHOD_POST, JSON.print(messageBody))
 	
 
 func _login_request_completed(result, response_code, headers, body):
