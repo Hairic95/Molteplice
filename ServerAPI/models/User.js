@@ -1,6 +1,5 @@
 const { Sequelize, Op, Model, DataTypes, UUIDV4 } = require('sequelize');
 const db = require('../config/database');
-const bcrypt = require("bcryptjs");
 
 const User = db.define('User', {
         IdUser: {
@@ -40,9 +39,5 @@ const User = db.define('User', {
         freezeTableName: true
     }
 )
-
-User.prototype.validPassword = (password) => {
-    return bcrypt.compare(password, this.Password);
-}
 
 module.exports = User;

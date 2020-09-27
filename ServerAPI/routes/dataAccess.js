@@ -3,8 +3,9 @@ const verify = require("./middleware");
 const User = require('../models/User');
 
 router.get("/", verify, (req, res) => {
+    console.log()
     res.json({
-        posts: {
+        result: {
             title: "hello world!"
         }
     });

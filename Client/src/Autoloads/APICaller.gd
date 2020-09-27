@@ -2,16 +2,21 @@ extends Node
 
 const api_url = "http://localhost:10000/"
 var headers = ["Content-Type: application/json"]
+var jwt_headers = headers.duplicate()
 var jwt_token : String = ""
 
 var register_request : HTTPRequest = HTTPRequest.new()
 var login_request : HTTPRequest = HTTPRequest.new()
+
+var test_request : HTTPRequest = HTTPRequest.new()
 
 func _ready():
 	add_child(register_request)
 	register_request.connect("request_completed", self, "_register_request_completed")
 	add_child(login_request)
 	login_request.connect("request_completed", self, "_login_request_completed")
+	add_child(test_request)
+	test_request.connect("request_completed", self, "_test_request_completed")
 
 func register_user(username : String, email : String, password : String):
 	
@@ -73,10 +78,16 @@ func login_user(username : String, password : String):
 	
 
 func _login_request_completed(result, response_code, headers, body):
-	print(result)
+	print(response_code)
 	print(body.get_string_from_utf8())
 	
 	# Parse Headers
+	
+	if (response_code == 200):
+		jwt_token = body.get_string_from_utf8()
+		
+		jwt_headers.append("auth-token: " + jwt_token)
+	
 	
 	var header_dictionary = {}
 	for hs in headers:
@@ -89,3 +100,13 @@ func _login_request_completed(result, response_code, headers, body):
 			"login":
 				if header_dictionary.has("auth-token"):
 					jwt_token = header_dictionary["auth-token"]
+
+func test():
+	
+	print(jwt_headers)
+	
+	test_request.request(api_url + "", jwt_headers, false, HTTPClient.METHOD_GET, JSON.print({}))
+
+func _test_request_completed(result, response_code, headers, body):
+	print(response_code)
+	print(body.get_string_from_utf8())

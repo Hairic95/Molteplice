@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 // Register
 router.post("/register", async (req, res) => {
@@ -38,23 +39,23 @@ router.post("/login", async (req, res) => {
     try {
         
         // Check if user already exists
-    User.findOne({
-        where: {
-            Username: req.body.username
-        }
-    }).then((user) => {
-        // Password is correct
-        if (!user.validPassword(req.body.password)) {
-            return res.status(400).send("Invalid password");
-        }
-        // Create and assign a jwt token
-        const token = jwt.sign({_id: user.IdUser}, process.env.JWT_SECRET);
-        res.header("res-category", "login");
-        res.header("auth-token", token).send(token);
-    }).catch((err) => {
-        console.log(err);
-        res.status(404).send("Username doesn't exist.");
-    });
+        User.findOne({
+            where: {
+                Username: req.body.username
+            }
+        }).then((user) => {
+            // Password is correct
+            if (!bcrypt.compare(req.body.password, user.Password)) {
+                return res.status(400).send("Invalid password");
+            }
+            // Create and assign a jwt token
+            const token = jwt.sign({_id: user.IdUser}, process.env.JWT_SECRET);
+            res.header("res-category", "login");
+            res.header("auth-token", token).status(200).send(token);
+        }).catch((err) => {
+            console.log(err);
+            res.status(404).send("Username doesn't exist.");
+        });
 
     } catch (err) {
         console.log(err);

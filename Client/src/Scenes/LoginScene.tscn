@@ -204,5 +204,13 @@ margin_top = 183.0
 margin_right = 328.0
 margin_bottom = 203.0
 text = "Login"
+
+[node name="Test" type="Button" parent="."]
+margin_left = 480.0
+margin_top = 464.0
+margin_right = 592.0
+margin_bottom = 496.0
+text = "Test"
 [connection signal="pressed" from="RegisterPanel/VBox/RegisterConfirm" to="." method="_on_RegisterConfirm_pressed"]
 [connection signal="pressed" from="LoginPanel/VBox/LoginConfirm" to="." method="_on_LoginConfirm_pressed"]
+[connection signal="pressed" from="Test" to="." method="_on_Test_pressed"]
